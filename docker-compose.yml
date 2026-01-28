@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16
+    container_name: bankcards-db
+    environment:
+      POSTGRES_DB: bankcards
+      POSTGRES_USER: bankcards
+      POSTGRES_PASSWORD: bankcards
+    ports:
+      - "5432:5432"
+    volumes:
+      - bankcards_pgdata:/var/lib/postgresql/data
+
+volumes:
+  bankcards_pgdata:
