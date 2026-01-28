@@ -1,0 +1,46 @@
+server:
+  port: ${APP_PORT:8080}
+
+spring:
+  application:
+    name: bankcards
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/bankcards}
+    username: ${DB_USER:bankcards}
+    password: ${DB_PASSWORD:bankcards}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: false
+
+  liquibase:
+    enabled: true
+    change-log: classpath:db/migration/db.changelog-master.yaml
+
+app:
+  security:
+    jwt:
+      issuer: bankcards
+      secret: ${JWT_SECRET:change-me-change-me-change-me-change-me-32bytes}
+      expiration-minutes: ${JWT_EXP_MINUTES:120}
+  crypto:
+    card-number:
+      # 32 bytes (base64) recommended; for demo you can keep env var
+      secret-base64: ${CARD_CRYPTO_SECRET_BASE64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=}
+  bootstrap:
+    admin:
+      username: ${BOOTSTRAP_ADMIN_USERNAME:admin}
+      password: ${BOOTSTRAP_ADMIN_PASSWORD:admin}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs

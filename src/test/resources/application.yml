@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DATABASE_TO_LOWER=TRUE
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  liquibase:
+    change-log: classpath:db/migration/db.changelog-master.yaml
+
+app:
+  security:
+    jwt:
+      issuer: test
+      secret: test-secret-test-secret-test-secret-test-secret-32bytes
+      expiration-minutes: 60
+  crypto:
+    card-number:
+      secret-base64: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+  bootstrap:
+    admin:
+      username: admin
+      password: admin
+
